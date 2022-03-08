@@ -164,7 +164,7 @@ pub fn process_loaded_tile_maps(
                         tileset.uid,
                         (
                             ldtk_map.tilesets.get(&tileset.uid).unwrap().clone(),
-                            tileset.clone(),
+                            tileset,
                         ),
                     );
                 });

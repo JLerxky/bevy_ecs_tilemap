@@ -28,6 +28,9 @@ env_logger = "0.9"
 serde_json = { version = "1.0" }
 tiled = { version = "0.9", default-features = false }
 
+[patch.crates-io]
+bevy = { git = "https://github.com/bevyengine/bevy" }
+
 [[example]]
 name = "ldtk"
 path = "examples/ldtk/ldtk_usage.rs"

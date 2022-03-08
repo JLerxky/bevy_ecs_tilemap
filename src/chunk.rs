@@ -262,22 +262,18 @@ pub(crate) fn update_chunk_visibility(
                         log::trace!("Hiding chunk @: {:?}", bounds);
                         visibility.is_visible = false;
                     }
-                } else {
-                    if !visibility.is_visible {
-                        log::trace!("Showing chunk @: {:?}", bounds);
-                        visibility.is_visible = true;
-                    }
+                } else if !visibility.is_visible {
+                    log::trace!("Showing chunk @: {:?}", bounds);
+                    visibility.is_visible = true;
                 }
-            } else {
-                if visibility.is_visible {
-                    log::trace!(
-                        "Hiding chunk @: {:?}, with camera_bounds: {:?}, bounds_size: {:?}",
-                        bounds,
-                        padded_camera_bounds,
-                        bounds_size
-                    );
-                    visibility.is_visible = false;
-                }
+            } else if visibility.is_visible {
+                log::trace!(
+                    "Hiding chunk @: {:?}, with camera_bounds: {:?}, bounds_size: {:?}",
+                    bounds,
+                    padded_camera_bounds,
+                    bounds_size
+                );
+                visibility.is_visible = false;
             }
         }
     }

@@ -47,9 +47,8 @@ impl<'w, 's> MapQuery<'w, 's> {
         material_handle: Handle<Image>,
     ) -> Entity {
         let layer_bundle = layer_builder.build(commands, &mut self.meshes, material_handle);
-        let mut layer = layer_bundle.layer;
+        let layer = layer_bundle.layer;
         let mut transform = layer_bundle.transform;
-        layer.settings.layer_id = layer.settings.layer_id;
         transform.translation.z = layer.settings.layer_id as f32;
         commands
             .entity(layer_builder.layer_entity)

@@ -91,8 +91,14 @@ where
 
                 let chunk_pos = ChunkPos(x, y);
                 let mut mesh = Mesh::new(PrimitiveTopology::TriangleList);
-                mesh.set_attribute("Vertex_Position", VertexAttributeValues::Float32x3(vec![]));
-                mesh.set_attribute("Vertex_Texture", VertexAttributeValues::Sint32x4(vec![]));
+                mesh.insert_attribute(
+                    Mesh::ATTRIBUTE_POSITION,
+                    VertexAttributeValues::Float32x3(vec![]),
+                );
+                mesh.insert_attribute(
+                    Mesh::ATTRIBUTE_NORMAL,
+                    VertexAttributeValues::Sint32x4(vec![]),
+                );
                 mesh.set_indices(Some(Indices::U32(vec![])));
                 let mesh_handle = meshes.add(mesh);
                 let chunk = Chunk::new(
@@ -202,10 +208,8 @@ where
     /// Returns an existing tile entity if it exists
     pub fn look_up_tile_entity(&self, tile_pos: TilePos) -> Option<Entity> {
         let morton_tile_index = get_tile_index(tile_pos, self.layer_size_in_tiles.x);
-        if morton_tile_index < self.tiles.capacity() {
-            if self.tiles[morton_tile_index].0.is_some() {
-                return self.tiles[morton_tile_index].0;
-            }
+        if morton_tile_index < self.tiles.capacity() && self.tiles[morton_tile_index].0.is_some() {
+            return self.tiles[morton_tile_index].0;
         }
 
         None
@@ -320,8 +324,14 @@ where
 
                 let chunk_pos = ChunkPos(x, y);
                 let mut mesh = Mesh::new(PrimitiveTopology::TriangleList);
-                mesh.set_attribute("Vertex_Position", VertexAttributeValues::Float32x3(vec![]));
-                mesh.set_attribute("Vertex_Texture", VertexAttributeValues::Sint32x4(vec![]));
+                mesh.insert_attribute(
+                    Mesh::ATTRIBUTE_POSITION,
+                    VertexAttributeValues::Float32x3(vec![]),
+                );
+                mesh.insert_attribute(
+                    Mesh::ATTRIBUTE_NORMAL,
+                    VertexAttributeValues::Sint32x4(vec![]),
+                );
                 mesh.set_indices(Some(Indices::U32(vec![])));
                 let mesh_handle = meshes.add(mesh);
                 let mut chunk = Chunk::new(
